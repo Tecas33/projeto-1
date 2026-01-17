@@ -3,23 +3,37 @@ import { Navbar, Call } from "./layuot";
 import { Link } from "react-scroll";
 import styled from "styled-components";
 
-// Hamburger para mobile
+// Hamburger para mobile com animação X
 const Hamburger = styled.div`
   display: none;
   flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
   cursor: pointer;
-  gap: 5px;
 
   span {
     height: 3px;
-    width: 25px;
+    width: 100%;
     background: #06d95a;
     border-radius: 2px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    transform-origin: 4px 0px;
   }
 
   @media (max-width: 768px) {
     display: flex;
+  }
+
+  /* Quando menu está aberto, transforma em X */
+  &.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  &.open span:nth-child(2) {
+    opacity: 0;
+  }
+  &.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 `;
 
@@ -27,11 +41,11 @@ const Hamburger = styled.div`
 const NavMenu = styled.ul`
   display: flex;
   gap: 1rem;
-  text-align: center;
+  list-style: none;
 
   @media (max-width: 768px) {
     position: absolute;
-    top: 50px; /* altura da navbar */
+    top: 60px; /* ajuste conforme a altura da navbar */
     left: 0;
     width: 100%;
     flex-direction: column;
@@ -51,7 +65,10 @@ function Header() {
         Fresh<span>Fruit</span>
       </h1>
 
-      <Hamburger onClick={() => setOpen(!open)}>
+      <Hamburger
+        className={open ? "open" : ""}
+        onClick={() => setOpen(!open)}
+      >
         <span></span>
         <span></span>
         <span></span>
