@@ -60,9 +60,7 @@ export const Call = styled.a`
   text-decoration: none;
   transition: 0.3s;
 
-  &:hover {
-    background-color: #05c350;
-  }
+ 
 
     @media(max-width:930px){
       display: none;
