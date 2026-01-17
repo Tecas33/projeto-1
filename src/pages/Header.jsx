@@ -103,13 +103,13 @@ function Header() {
 
       <Call
         as={Link}
-        to="contato"
+        to="Produto"
         smooth={true}
         duration={500}
         offset={-70}
         onClick={() => setOpen(false)}
       >
-        Contato
+        Comprar Agora
       </Call>
     </Navbar>
   );
