@@ -2,38 +2,20 @@ import { useState } from "react";
 import { Navbar, Call } from "./layuot";
 import { Link } from "react-scroll";
 import styled from "styled-components";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
-// Hamburger para mobile com animação X
-const Hamburger = styled.div`
+// Botão do menu
+const HamburgerButton = styled.button`
   display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 20px;
+  background: none;
+  border: none;
   cursor: pointer;
-
-  span {
-    height: 3px;
-    width: 100%;
-    background: #06d95a;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-    transform-origin: 4px 0px;
-  }
+  font-size: 2rem;
+  color: #06d95a; /* verde */
 
   @media (max-width: 768px) {
-    display: flex;
-  }
-
-  /* Quando menu está aberto, transforma em X */
-  &.open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  &.open span:nth-child(2) {
-    opacity: 0;
-  }
-  &.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    display: block;
   }
 `;
 
@@ -45,7 +27,7 @@ const NavMenu = styled.ul`
 
   @media (max-width: 768px) {
     position: absolute;
-    top: 60px; /* ajuste conforme a altura da navbar */
+    top: 60px; /* altura da navbar */
     left: 0;
     width: 100%;
     flex-direction: column;
@@ -53,6 +35,8 @@ const NavMenu = styled.ul`
     overflow: hidden;
     max-height: ${({ open }) => (open ? "300px" : "0")};
     transition: max-height 0.3s ease-in-out;
+    text-align: center;
+    padding: ${({ open }) => (open ? "1rem 0" : "0")};
   }
 `;
 
@@ -65,14 +49,10 @@ function Header() {
         Fresh<span>Fruit</span>
       </h1>
 
-      <Hamburger
-        className={open ? "open" : ""}
-        onClick={() => setOpen(!open)}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </Hamburger>
+      {/* Botão Hamburger / X */}
+      <HamburgerButton onClick={() => setOpen(!open)}>
+        {open ? <AiOutlineClose /> : <GiHamburgerMenu />}
+      </HamburgerButton>
 
       <NavMenu open={open}>
         <li>
